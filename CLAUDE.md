@@ -1,4 +1,4 @@
-README.md is a generated file, generated via internal/README.template.md.
+DICTIONARY.md is a generated file, generated via internal/README.template.md. README.md is the hand-written project README for the learning site in web/.
 
 Links to other entries should only have a link on the first occurrence. I.e. if session appears twice in the entry, only the first should have an outward link.
 

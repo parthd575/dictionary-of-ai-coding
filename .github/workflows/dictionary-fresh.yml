@@ -1,4 +1,4 @@
-name: README freshness
+name: Dictionary freshness
 
 on:
   pull_request:
@@ -17,12 +17,12 @@ jobs:
         run: npm install --no-audit --no-fund
       - name: Typecheck generator
         run: npx tsc -p internal/tsconfig.json
-      - name: Regenerate README
+      - name: Regenerate DICTIONARY.md
         run: npm run generate
-      - name: Fail if README.md is out of sync
+      - name: Fail if DICTIONARY.md is out of sync
         run: |
-          if ! git diff --exit-code -- README.md; then
-            echo "README.md is out of sync with dictionary/, internal/Curriculum.md, or internal/README.template.md."
+          if ! git diff --exit-code -- DICTIONARY.md; then
+            echo "DICTIONARY.md is out of sync with dictionary/, internal/Curriculum.md, or internal/README.template.md."
             echo "Run: npm run generate && commit the result."
             exit 1
           fi

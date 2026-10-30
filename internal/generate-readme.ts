@@ -10,7 +10,7 @@ const ROOT = dirname(HERE);
 const CURRICULUM = join(HERE, "Curriculum.md");
 const TEMPLATE = join(HERE, "README.template.md");
 const DICT_DIR = join(ROOT, "dictionary");
-const OUTPUT = join(ROOT, "README.md");
+const OUTPUT = join(ROOT, "DICTIONARY.md");
 const MARKER = "<!-- CURRICULUM -->";
 const TOC_MARKER = "<!-- TOC -->";
 
