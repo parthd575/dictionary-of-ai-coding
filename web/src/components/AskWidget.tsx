@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link } from "react-router";
 import { ask, type Answer } from "../lib/ask";
 import { content } from "../lib/content";
@@ -9,9 +9,15 @@ const SUGGESTIONS = ["What is a token?", "Why does the agent forget things?", "D
 
 export function AskWidget() {
   const [open, setOpen] = useState(false);
+  const [split, setSplit] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [draft, setDraft] = useState("");
   const log = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    document.documentElement.classList.toggle("ask-split", open && split);
+    return () => document.documentElement.classList.remove("ask-split");
+  }, [open, split]);
 
   const submit = (question: string) => {
     const q = question.trim();
@@ -31,13 +37,24 @@ export function AskWidget() {
   }
 
   return (
-    <section className="ask-panel" aria-label="Ask a question">
+    <section className={split ? "ask-panel split" : "ask-panel"} aria-label="Ask a question">
       <header className="ask-head">
         <div>
           <strong>Ask the dictionary</strong>
           <small>Answers come from the {Object.keys(content.entries).length} entries, no AI model.</small>
         </div>
-        <button className="icon-btn" onClick={() => setOpen(false)} aria-label="Close">×</button>
+        <div className="ask-head-actions">
+          <button
+            className="icon-btn ask-split-btn"
+            onClick={() => setSplit((v) => !v)}
+            aria-pressed={split}
+            aria-label={split ? "Restore panel size" : "Split window in half"}
+            title={split ? "Restore panel size" : "Split window in half"}
+          >
+            {split ? "❐" : "◧"}
+          </button>
+          <button className="icon-btn" onClick={() => setOpen(false)} aria-label="Close">×</button>
+        </div>
       </header>
 
       <div className="ask-log" ref={log}>

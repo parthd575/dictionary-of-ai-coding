@@ -270,3 +270,16 @@ kbd {
 .ask-form input { flex: 1; min-width: 0; padding: 9px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); color: var(--text); font: inherit; font-size: 14px; }
 .ask-form input:focus { outline: none; border-color: var(--accent); }
 .ask-form .btn { padding: 8px 14px; font-size: 14px; }
+
+.ask-head-actions { display: flex; gap: 6px; align-items: flex-start; }
+.ask-panel.split { top: 0; right: 0; bottom: 0; width: 50vw; height: auto; border-radius: 0; border-width: 0 0 0 1px; box-shadow: none; }
+html.ask-split body { margin-right: 50vw; }
+@media (max-width: 760px) {
+  .ask-split-btn { display: none; }
+  .ask-panel.split { top: auto; right: 20px; bottom: 20px; width: min(400px, calc(100vw - 32px)); height: min(560px, calc(100vh - 100px)); border-radius: 16px; border-width: 1px; }
+  html.ask-split body { margin-right: 0; }
+}
+.nav a, .brand-name { white-space: nowrap; }
+html.ask-split .brand-name { display: none; }
+html.ask-split .topbar-inner { gap: 12px; }
+html.ask-split .search-btn { gap: 12px; }
