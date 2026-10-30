@@ -5,6 +5,7 @@ import { EntryPage } from "./pages/EntryPage";
 import { IndexPage } from "./pages/IndexPage";
 import { MapPage } from "./pages/MapPage";
 import { SearchPalette } from "./components/SearchPalette";
+import { AskWidget } from "./components/AskWidget";
 import { useTheme } from "./lib/theme";
 
 function ScrollToTop() {
@@ -73,6 +74,7 @@ export function App() {
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
+      <AskWidget />
       <SearchPalette open={searchOpen} onClose={() => setSearchOpen(false)} />
     </>
   );
