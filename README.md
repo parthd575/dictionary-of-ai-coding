@@ -10,7 +10,8 @@ An interactive site for learning the vocabulary of working with AI coding agents
 
 | Feature | What it does |
 | --- | --- |
-| **Curriculum home** | Seven sections in teaching order, each with a progress bar. A Continue button opens the first entry you haven't marked as learned. |
+| **Curriculum home** | Seven sections in teaching order, each with a progress bar. A Continue button opens the first entry you haven't marked as learned, and Surprise me opens a random unlearned one. |
+| **Animated home page** | A slowly drifting colour glow, counting stats, two rows of scrolling term pills (hover to pause), and sections that fade in as you scroll. All motion is turned off when the system's reduced-motion setting is on. |
 | **Entry pages** | A single reading column with the definition, a styled Usage dialogue, previous/next navigation, and a side rail listing Related entries and Referenced by. |
 | **Learned tracking** | A manual toggle on every entry. Progress is stored in the browser's `localStorage`: no account, no server. |
 | **Search** | Press `⌘K` / `Ctrl+K` or `/` to search titles, descriptions, bodies, and usage text. Matching is prefix- and typo-tolerant. |

@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { content, order } from "../lib/content";
+import { sectionColour } from "../lib/colour";
 
 const SIZE = 900;
 const C = SIZE / 2;
 const R = 300;
 
-const hue = (section: number) => 250 + (section - 1) * 48;
-const colour = (section: number) => `oklch(0.64 0.15 ${hue(section)})`;
+const colour = sectionColour;
 
 export function MapPage() {
   const navigate = useNavigate();
@@ -16,27 +16,37 @@ export function MapPage() {
   const pos = new Map(
     order.map((slug, i) => {
       const a = (i / order.length) * Math.PI * 2 - Math.PI / 2;
-      return [slug, { a, x: C + R * Math.cos(a), y: C + R * Math.sin(a) }] as const;
-    }),
+      return [
+        slug,
+        { a, x: C + R * Math.cos(a), y: C + R * Math.sin(a) },
+      ] as const;
+    })
   );
 
   const edges = order.flatMap((from) =>
-    content.entries[from]!.links.map((to) => ({ from, to })),
+    content.entries[from]!.links.map((to) => ({ from, to }))
   );
   const connected = (slug: string) =>
     hover === slug ||
     (hover !== null &&
-      (content.entries[hover]!.links.includes(slug) || content.entries[slug]!.links.includes(hover)));
+      (content.entries[hover]!.links.includes(slug) ||
+        content.entries[slug]!.links.includes(hover)));
 
   return (
     <div className="container">
       <h1 className="page-title">Map</h1>
       <p className="lede">
-        Each dot is an entry, placed in curriculum order. A line means one entry links to the other.
-        Hover a dot to see its neighbours; select it to open the entry.
+        Each dot is an entry, placed in curriculum order. A line means one entry
+        links to the other. Hover a dot to see its neighbours; select it to open
+        the entry.
       </p>
       <div className="map-wrap">
-        <svg viewBox={`0 0 ${SIZE} ${SIZE}`} className="map" role="img" aria-label="Link map of entries">
+        <svg
+          viewBox={`0 0 ${SIZE} ${SIZE}`}
+          className="map"
+          role="img"
+          aria-label="Link map of entries"
+        >
           {edges.map(({ from, to }) => {
             const a = pos.get(from)!;
             const b = pos.get(to)!;
@@ -46,7 +56,11 @@ export function MapPage() {
                 key={`${from}>${to}`}
                 d={`M${a.x},${a.y} Q${C},${C} ${b.x},${b.y}`}
                 className={on ? "edge on" : hover ? "edge dim" : "edge"}
-                style={on ? { stroke: colour(content.entries[hover!]!.section) } : undefined}
+                style={
+                  on
+                    ? { stroke: colour(content.entries[hover!]!.section) }
+                    : undefined
+                }
               />
             );
           })}
@@ -67,12 +81,19 @@ export function MapPage() {
                 onFocus={() => setHover(slug)}
                 onBlur={() => setHover(null)}
                 onClick={() => navigate(`/entry/${slug}`)}
-                onKeyDown={(ev) => ev.key === "Enter" && navigate(`/entry/${slug}`)}
+                onKeyDown={(ev) =>
+                  ev.key === "Enter" && navigate(`/entry/${slug}`)
+                }
                 tabIndex={0}
                 role="link"
                 aria-label={e.title}
               >
-                <circle cx={p.x} cy={p.y} r={hover === slug ? 8 : 5.5} fill={colour(e.section)} />
+                <circle
+                  cx={p.x}
+                  cy={p.y}
+                  r={hover === slug ? 8 : 5.5}
+                  fill={colour(e.section)}
+                />
                 <circle cx={p.x} cy={p.y} r={16} fill="transparent" />
                 <text
                   x={lx}
@@ -80,7 +101,9 @@ export function MapPage() {
                   transform={`rotate(${flip ? deg + 180 : deg} ${lx} ${ly})`}
                   textAnchor={flip ? "end" : "start"}
                   dominantBaseline="middle"
-                  className={hover === slug ? "node-label strong" : "node-label"}
+                  className={
+                    hover === slug ? "node-label strong" : "node-label"
+                  }
                 >
                   {e.title}
                 </text>
