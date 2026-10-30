@@ -43,7 +43,7 @@ export function App() {
           </Link>
           <nav className="nav" aria-label="Primary">
             <NavLink to="/" end>Curriculum</NavLink>
-            <NavLink to="/index">A–Z</NavLink>
+            <NavLink to="/a-z">A–Z</NavLink>
             <NavLink to="/map">Map</NavLink>
           </nav>
           <div className="topbar-actions">
@@ -66,7 +66,7 @@ export function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/entry/:slug" element={<EntryPage />} />
-          <Route path="/index" element={<IndexPage />} />
+          <Route path="/a-z" element={<IndexPage />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="*" element={<Home />} />
         </Routes>
